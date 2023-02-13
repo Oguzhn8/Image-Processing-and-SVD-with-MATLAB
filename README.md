@@ -38,12 +38,39 @@ V values can be thought of as similar to U but this time for columns of A instea
 Each element of an image is represented as the pixel's grayscale value in a rectangular array. We have a 3-dimensional array of size nxmx3 for colored images, where n and m stand for the number of pixels vertically and horizontally, respectively, and we record the intensity of the red, green, and blue colors for each pixel. In image compression with SVD, a low-order approximation of a matrix is created that represents an image for each color separately. The resulting 3D array will be a good approximation of the original image. </br>
 ### Exercise 1
 1 - NASA photo (TarantulaNebula.jpg) comes from the Hubble telescope and presents a dramatic picture of this extra-galactic formation. Download it </br>
-2 - Matlab provides various image processing utilities. In this case, read the image in using the following command: </br>
-nasacolor=imread('TarantulaNebula.jpg');  </br>
+2 - Python has several image manipulation helper libraries. In this study, matplotlib library will be used. In this case, read the image in using the following command: </br>
+![image](https://user-images.githubusercontent.com/78887209/218455397-85be1ded-2edb-4223-81b5-674e3fa4791e.png)  </br>
 The variable nasacolor will be a 567x630x3 matrix of integer values between 0 and 255. Display the color plot using the command: </br>
-image(nasacolor) </br>
+![image](https://user-images.githubusercontent.com/78887209/218455548-18794662-191b-4014-9f22-ef4c8ca0ed92.png) </br>
+The output of the command is as follows: </br>
+![image](https://user-images.githubusercontent.com/78887209/218455719-ee3b7782-acf8-496d-b556-71efa1ed3540.png) </br>
 The third subscript of the array nasa refers to the red, green, and blue color components. To simplify this exercise, turn it into a greyscale with ordinary double precision values 0-255 using the following commands: </br>
-nasa=sum(nasacolor,3,'double'); %sum up red+green+blue </br>
-m=max(max(nasa)); %find the max value </br>
-nasa=nasa*255/m; %make this be bright white </br>
+![image](https://user-images.githubusercontent.com/78887209/218456277-b4d26013-a438-4dba-9d66-e7f65a1a14f6.png) </br>
+The result from these commands is that nasa is an ordinary 567x630 array of double precision numbers. Python has the notion of a ``colormap'' that determines how the values in the matrix will be colored. Use the command when the plot the new image:  </br>
+![image](https://user-images.githubusercontent.com/78887209/218456724-eb985d8b-c542-4c0f-a82f-467011594289.png) </br>
+The output of the command is as follows: </br>
+![image](https://user-images.githubusercontent.com/78887209/218457000-23489578-0966-49e8-82c5-341cfe752252.png) </br>
+#### Perform Singular Value Decomposition
+The following command is used to perform the SVD: </br>
+![image](https://user-images.githubusercontent.com/78887209/218457833-cf8fd446-29f8-49ff-ab79-7fcf9cd25ae6.png) </br>
+The following command is used to plot singular values on a semilog scale: </br>
+![image](https://user-images.githubusercontent.com/78887209/218460286-fe7240c2-d6e6-4df1-af70-1fe63209f65c.png) </br>
+Output: </br>
+![svd_plot](https://user-images.githubusercontent.com/78887209/218460443-bc6fb22e-6051-479b-9e9e-a0d6057501bc.png) </br>
+Values of less than 50 are observed to drop below 2% of the maximum very quickly. Construct the three new matrices with the following commands: </br>
+![image](https://user-images.githubusercontent.com/78887209/218498084-3d86efba-73df-4005-b2f7-39eb2cbd5f59.png) </br>
+You can observe the outputs for different versions below: </br>
+![image](https://user-images.githubusercontent.com/78887209/218498313-b42c94fb-51d1-403a-bf8d-7c8050dec369.png)
+![image](https://user-images.githubusercontent.com/78887209/218498409-828995f4-5345-44be-bca4-604a531523ae.png)
+![image](https://user-images.githubusercontent.com/78887209/218498530-0ced8a25-9d24-46df-8cc7-2ceed3b00daf.png) </br>
+These matrices are of lower rank than the nasa matrix, and can be stored in a more efficient manner. (The nasa matrix is 567x630 and requires 357,210 numbers to store it. In contrast, nasa50 requires subsets of U and V that are 567x50 and the diagonal of S, for a total of 56,750. This is better than four to one savings in space.) The higher the singular value in reconstruction, the better the quality of the approach, but also the more data is needed to encode it. There are very small differences between the original and the one with 100 singular values, some noticeable differences with 50 singular values, while in the case of 25 singular values the image is severely degraded. </br>
+SVD is routinely used in statistics for principal component analysis and in numerical simulations for reducing the order of models. For image compression, more sophisticated methods like JPG that take human perception into account generally outperform compression using SVD.
+## Further Readings
+http://timbaumann.info/svd-image-compression-demo/  </br>
+https://machinelearningmastery.com/singular-value-decomposition-for-machine-learning/  </br>
+https://www.section.io/engineering-education/singular-value-decomposition-in-python/
+
+
+
+
 
