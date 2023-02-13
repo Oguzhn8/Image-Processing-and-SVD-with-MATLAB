@@ -1,4 +1,4 @@
-# Image-Processing-and-SVD-with-MATLAB
+# Singular Value Decomposition with Python and MATLAB
 Singular Value Decomposition (SVD) is used widely in signal processing. Noise reduction and image compression are some of the applications of SVD.To give the formula as a starting point, the SVD structure is as follows: </br>
 ![image](https://user-images.githubusercontent.com/78887209/218332729-a7785950-e74a-4ca9-abfe-39a54d40b348.png) </br>
 A is an m x n matrix you originally have either from an image or some other data source. U and V are orthogonal matrices and Σ is a diagonal matrix.  To understand this structure; Its meaning will be explained later.
